@@ -33,6 +33,12 @@ export const cartReducer = (state: CartState, action: CartAction) => {
         wishItems: action.payload,
       };
 
+      case CartActionType.UPDATEQTY:
+      return {
+        ...state,
+        products: action.payload,
+      };
+
     default:
       return state;
   }

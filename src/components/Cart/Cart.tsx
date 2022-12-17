@@ -1,11 +1,26 @@
-import { ProductsWrapper, Title, CheckoutButton } from './Cart.styled';
+import { ProductsWrapper, Title, CheckoutButton, CartItem, QuantityDiv, QuantityButton } from './Cart.styled';
 
 import { ProductCard } from '../ProductCard';
-import { useContext } from 'react';
+import { useContext} from 'react';
 import { CartContext } from '../useContext/cartContext';
+import { Product } from '../../models';
 
 export const Cart = () => {
-  const {products, total} = useContext(CartContext);
+  const {products, total, updateQuantity} = useContext(CartContext);
+
+  const handleAdd = (product: Product) =>{
+    
+    product.quantity += 1;
+    updateQuantity(product);
+  }
+
+  const handleSubtract = (product: Product) =>{
+    if(product.quantity > 1){
+       product.quantity -= 1;
+    updateQuantity(product);
+
+    }
+  }
 
   return (
     <>
@@ -13,7 +28,20 @@ export const Cart = () => {
       <ProductsWrapper>
       <ProductsWrapper>
         {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+          <CartItem key={index}>
+          <ProductCard  {...product} />
+          <QuantityDiv>
+          <QuantityButton onClick={() => handleSubtract(product)}>
+          <p>-</p>
+          </QuantityButton>
+          <p>{product.quantity}</p>
+          <QuantityButton onClick={() => handleAdd(product)}>
+          <p>+</p>
+          </QuantityButton>
+
+          </QuantityDiv>
+
+          </CartItem>
         ))}
       </ProductsWrapper>
 

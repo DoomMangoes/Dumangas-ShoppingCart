@@ -5,7 +5,7 @@ import { Cart } from '../Cart';
 import { Products } from '../Products';
 import { CartContext} from '../useContext';
 import { useReducer } from 'react';
-import { cartReducer, add, remove, update, cartInitialState, addWishItem,removeWishItem} from '../useReducer';
+import { cartReducer, add, remove, update, cartInitialState, addWishItem,removeWishItem, updateQty} from '../useReducer';
 import { Product } from '../../models';
 import { Wishlist } from '../Wishlist';
 
@@ -15,7 +15,7 @@ export const App = () => {
  
   const addToCart = (product: Product) => {
     const cart = cartState.products.concat(product);
-
+   
     updateTotal(cart);
 
     cartDispatch( add(cart));
@@ -33,8 +33,6 @@ export const App = () => {
     const wishlist = cartState.wishItems.filter(
       (selectedProduct: Product) => selectedProduct.name !== product.name
     );
-    updateTotal(wishlist);
-
     cartDispatch(removeWishItem(wishlist));
   };
 
@@ -42,6 +40,7 @@ export const App = () => {
     const cart = cartState.products.filter(
       (selectedProduct: Product) => selectedProduct.name !== product.name
     );
+
     updateTotal(cart);
 
     cartDispatch(remove(cart));
@@ -49,11 +48,36 @@ export const App = () => {
 
   const updateTotal = (products: [] = []) => {
     let total = 0;
-    products.forEach((product: { price: number; }) => (total = total + product.price));
+
+    products.forEach((product: {
+      quantity: number; price: number; 
+}) => (total = total + (product.price * product.quantity)));
 
     cartDispatch(update(total));
   };
 
+  const updateQuantity = (product: Product) => {
+
+    const cart = cartState.products.map((item: {name: String, quantity: number, price: number}, ) =>{
+      if(item.name === product.name){
+        const updatedItem = {
+          ...item, quantity: product.quantity,
+        }
+        return updatedItem;
+        
+      }
+
+      console.log(product.price, product.quantity);
+      return item;
+    }
+    );
+
+    
+    updateTotal(cart);
+
+    cartDispatch(updateQty(cart))
+
+  }
 
   const cartValue = {
     total: cartState.total,
@@ -62,7 +86,8 @@ export const App = () => {
     addToCart,
     removeItem,
     addToWishlist,
-    removeFromWishlist
+    removeFromWishlist,
+    updateQuantity
     
   }
 

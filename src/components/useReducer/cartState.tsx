@@ -8,6 +8,7 @@ export type CartState = {
     removeItem: any,
     addToWishlist: any,
     removeFromWishlist: any,
+    updateQuantity: any
 }
 
 export const cartInitialState = {
@@ -18,5 +19,6 @@ export const cartInitialState = {
     removeItem: null,
     addToWishlist: null,
     removeFromWishlist: null,
+    updateQuantity: null
 }
 

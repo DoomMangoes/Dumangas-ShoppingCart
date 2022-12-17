@@ -12,7 +12,7 @@ import {
   import { CartContext} from "../useContext";
   import {FaGift} from 'react-icons/fa';
   
-  export const ProductCard = ({ name, imageUrl, price }: Product) => {
+  export const ProductCard = ({ name, imageUrl, price, quantity }: Product) => {
 
     
     const {products, wishItems, addToCart, removeItem,addToWishlist,removeFromWishlist} = useContext(CartContext);
@@ -20,14 +20,14 @@ import {
     const [inWishlist, setInWishlist] = useState(false);
 
     const handleCartClick = () =>{
-      const item = {name, imageUrl, price};
+      const item = {name, imageUrl, price, quantity};
 
       if (inCart){
-
+        item.quantity = 0;
         removeItem(item);
         setInCart(false);
       }else{
-      
+        item.quantity = 1;
         addToCart(item);
         setInCart(true);
       }
@@ -35,7 +35,7 @@ import {
     };
 
     const handleWishlistClick = () =>{
-      const item = {name, imageUrl, price};
+      const item = {name, imageUrl, price, quantity};
 
       if (inWishlist){
 

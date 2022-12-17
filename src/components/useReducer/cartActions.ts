@@ -5,7 +5,8 @@ export enum CartActionType {
     REMOVE = 'remove',
     UPDATE = 'update',
     ADDWISH = 'addWishItem',
-    REMOVEWISH = 'removeWishItem'
+    REMOVEWISH = 'removeWishItem',
+    UPDATEQTY = 'updateQty'
   }
   
   export type CartAction = {
@@ -35,5 +36,10 @@ export enum CartActionType {
   
   export const removeWishItem = (product: Product): CartAction => ({
     type: CartActionType.REMOVEWISH,
+    payload: product,
+  });
+
+  export const updateQty = (product: Product): CartAction => ({
+    type: CartActionType.UPDATEQTY,
     payload: product,
   });
