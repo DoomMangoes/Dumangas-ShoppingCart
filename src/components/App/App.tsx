@@ -8,6 +8,7 @@ import { useReducer } from 'react';
 import { cartReducer, add, remove, update, cartInitialState, addWishItem,removeWishItem, updateQty} from '../useReducer';
 import { Product } from '../../models';
 import { Wishlist } from '../Wishlist';
+import { CheckOut } from '../CheckOut/CheckOut';
 
 
 export const App = () => {
@@ -106,11 +107,13 @@ export const App = () => {
           <Link to='/'>Home</Link>
           <Link to='/cart'>Cart</Link>
           <Link to ='/Wishlist'>Wishlist</Link>
+          <Link to='/CheckOut'>Checkout</Link>
         </LinksWrapper>
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/Wishlist' element={<Wishlist />} />
+          <Route path='/CheckOut' element={<CheckOut />} />
         </Routes>
       </Wrapper>
 

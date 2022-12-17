@@ -4,9 +4,11 @@ import { ProductCard } from '../ProductCard';
 import { useContext} from 'react';
 import { CartContext } from '../useContext/cartContext';
 import { Product } from '../../models';
+import { useNavigate } from 'react-router-dom';
 
 export const Cart = () => {
   const {products, total, updateQuantity} = useContext(CartContext);
+  const nav = useNavigate();
 
   const handleAdd = (product: Product) =>{
     
@@ -49,9 +51,10 @@ export const Cart = () => {
 
 
          
-      <CheckoutButton onClick={() => console.log("Derp")}>
+      {total != 0 && <CheckoutButton onClick={() =>nav('/CheckOut')}>
           <p>Checkout Items</p>
         </CheckoutButton>
+       }
     </>
   );
 };
