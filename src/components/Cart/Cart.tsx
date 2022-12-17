@@ -1,4 +1,4 @@
-import { ProductsWrapper, Title } from './Cart.styled';
+import { ProductsWrapper, Title, CheckoutButton } from './Cart.styled';
 
 import { ProductCard } from '../ProductCard';
 import { useContext } from 'react';
@@ -18,6 +18,12 @@ export const Cart = () => {
       </ProductsWrapper>
 
       </ProductsWrapper>
+
+
+         
+      <CheckoutButton onClick={() => console.log("Derp")}>
+          <p>Checkout Items</p>
+        </CheckoutButton>
     </>
   );
 };
