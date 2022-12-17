@@ -1,5 +1,5 @@
-import { CartAction, CartActionType } from "./actions";
-import { CartState } from "./state";
+import { CartAction, CartActionType } from "./cartActions";
+import { CartState } from "./cartState";
 
 export const cartReducer = (state: CartState, action: CartAction) => {
   switch (action.type) {
@@ -20,6 +20,19 @@ export const cartReducer = (state: CartState, action: CartAction) => {
         ...state,
         total: action.payload,
       };
+
+    case CartActionType.ADDWISH:
+      return {
+        ...state,
+        wishItems: action.payload,
+      };
+
+    case CartActionType.REMOVEWISH:
+      return {
+        ...state,
+        wishItems: action.payload,
+      };
+
     default:
       return state;
   }

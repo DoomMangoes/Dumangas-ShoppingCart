@@ -1,22 +1,19 @@
-import { ProductsWrapper, Title } from './Cart.styled';
+import { ProductsWrapper, Title } from './Wishlist.styled';
 
 import { ProductCard } from '../ProductCard';
 import { useContext } from 'react';
 import { CartContext } from '../useContext/cartContext';
 
-export const Cart = () => {
-  const {products, total} = useContext(CartContext);
+export const Wishlist = () => {
+  const {wishItems} = useContext(CartContext);
 
   return (
     <>
-      <Title>Your cart total is ${total}</Title>
+      <Title>Your Wishlist Items:</Title>
       <ProductsWrapper>
-      <ProductsWrapper>
-        {products.map((product, index) => (
+      {wishItems.map((product, index) => (
           <ProductCard key={index} {...product} />
         ))}
-      </ProductsWrapper>
-
       </ProductsWrapper>
     </>
   );
