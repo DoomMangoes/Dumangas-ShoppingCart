@@ -10,6 +10,7 @@ import {
   import { Product } from '../../models';
   import { useState, useEffect, useContext} from 'react';
   import { CartContext} from "../useContext";
+  import {FaGift} from 'react-icons/fa';
   
   export const ProductCard = ({ name, imageUrl, price }: Product) => {
 
@@ -76,7 +77,7 @@ import {
           <p>{inCart? "-" : "+"}</p>
         </AddButton>
         <WishlistButton isInWishlist={inWishlist} onClick={handleWishlistClick}>
-          <p>{inWishlist? "?" : "/"}</p>
+          <p><FaGift /></p>
         </WishlistButton>
         <TextContainer>
           <Title>{name}</Title>
